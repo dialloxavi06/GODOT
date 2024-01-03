@@ -4,7 +4,10 @@ var current_states
 enum enemy_states {MOVEUP, MOVEDOWN, MOVERIGHT, MOVELEFT, DEAD}
 
 var dir # pour déclarer l variable de la direction
+@onready var dead_anim = preload("res://Scenes/Effect/dead_fx.tscn")
+@onready var coin_loot = preload("res://Scenes/Detectable/piece.tscn")
 @export var speed = 50
+@export var vie = 3
 
 
 func _ready():
@@ -12,6 +15,8 @@ func _ready():
 
 
 func _physics_process(delta):
+	if vie <= 0:
+		current_states = enemy_states.DEAD
 	match current_states:
 		enemy_states.MOVEDOWN:
 			move_down(delta)
@@ -21,6 +26,8 @@ func _physics_process(delta):
 			move_left(delta)
 		enemy_states.MOVERIGHT:
 			move_right(delta)
+		enemy_states.DEAD:
+			dead()
 	
 	move_and_slide()
 	
@@ -66,5 +73,19 @@ func move_right(delta):
 	velocity.x = clamp(-speed, 15 , speed)  
 	velocity.y = 0
 	$anim.play("move_right")
+	
+func dead():
+	dead_animation()
+	queue_free()
 
-
+func dead_animation():
+	var mort = dead_anim.instantiate()
+	mort.global_position = global_position
+	get_tree().get_root().add_child(mort)
+	loot_coin()
+	
+func loot_coin():
+	var coin = coin_loot.instantiate()
+	coin.global_position = global_position
+	get_tree().get_root().add_child(coin)
+	

@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=3 uid="uid://ddktii8gvvlqx"]
+
+[ext_resource type="Texture2D" uid="uid://c0y46w65kuy3v" path="res://Sprites/Effect/enemy_afterdead_explosion_anim_spritesheet.png" id="1_7ydcb"]
+
+[sub_resource type="Animation" id="Animation_blrhl"]
+resource_name = "Active"
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_kakrp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h70r3"]
+_data = {
+"Active": SubResource("Animation_blrhl"),
+"RESET": SubResource("Animation_kakrp")
+}
+
+[node name="dead_fx" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_7ydcb")
+hframes = 5
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_h70r3")
+}

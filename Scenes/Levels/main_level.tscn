@@ -288,6 +288,12 @@ position = Vector2(77, 203)
 [node name="piece3" parent="." instance=ExtResource("5_7uprh")]
 position = Vector2(300, 203)
 
+[node name="piece5" parent="." instance=ExtResource("5_7uprh")]
+position = Vector2(359, 129)
+
+[node name="piece6" parent="." instance=ExtResource("5_7uprh")]
+position = Vector2(269, 39)
+
 [node name="piece4" parent="." instance=ExtResource("5_7uprh")]
 position = Vector2(317, 80)
 
@@ -330,4 +336,20 @@ hframes = 5
 position = Vector2(247, 90)
 
 [node name="enemy1" parent="." instance=ExtResource("11_3nu2g")]
-position = Vector2(320, 128)
+position = Vector2(221, 50)
+
+[node name="enemy2" parent="." instance=ExtResource("11_3nu2g")]
+position = Vector2(295, 146)
+rotation = -1.95798
+
+[node name="enemy5" parent="." instance=ExtResource("11_3nu2g")]
+position = Vector2(96, 77)
+rotation = -1.95798
+
+[node name="enemy4" parent="." instance=ExtResource("11_3nu2g")]
+position = Vector2(220, 188)
+rotation = -1.95798
+
+[node name="enemy3" parent="." instance=ExtResource("11_3nu2g")]
+position = Vector2(144, 181)
+rotation = -1.95798

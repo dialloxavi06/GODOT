@@ -1,7 +1,14 @@
-[gd_scene load_steps=12 format=3 uid="uid://uhxu5svsk5cs"]
+[gd_scene load_steps=15 format=3 uid="uid://uhxu5svsk5cs"]
 
 [ext_resource type="Texture2D" uid="uid://58u4pbewmxbw" path="res://Sprites/Enemies/Enemy-crawl.png" id="1_s0tx2"]
 [ext_resource type="Script" path="res://Scripts/Enemy/enemy_1.gd" id="1_sk2hh"]
+[ext_resource type="Shader" path="res://Scenes/Shaders/hurt.gdshader" id="2_q5qr6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5072q"]
+resource_local_to_scene = true
+shader = ExtResource("2_q5qr6")
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_modifier = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kcsp8"]
 size = Vector2(14, 7)
@@ -260,10 +267,13 @@ _data = {
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_t1fkw"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_bfmi1"]
+
 [node name="enemy1" type="CharacterBody2D"]
 script = ExtResource("1_sk2hh")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_5072q")
 texture = ExtResource("1_s0tx2")
 hframes = 4
 vframes = 4
@@ -288,4 +298,13 @@ debug_color = Color(0.941176, 0.109804, 0.533333, 0.419608)
 wait_time = 2.0
 autostart = true
 
+[node name="BoxCollision" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BoxCollision"]
+shape = SubResource("CircleShape2D_bfmi1")
+debug_color = Color(0.878431, 0.223529, 0.643137, 0.419608)
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="area_entered" from="BoxCollision" to="." method="_on_box_collision_area_entered"]

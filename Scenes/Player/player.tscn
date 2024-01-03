@@ -701,7 +701,7 @@ parameters/Jump/blend_position = Vector2(0, 0)
 parameters/Move/blend_position = Vector2(0, 0)
 parameters/Sword/blend_position = Vector2(0, 0)
 
-[node name="sword" type="Area2D" parent="."]
+[node name="sword" type="Area2D" parent="." groups=["Sword"]]
 position = Vector2(23, 0)
 collision_layer = 2
 collision_mask = 4
